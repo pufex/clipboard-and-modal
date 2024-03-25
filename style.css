@@ -1,0 +1,171 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+body, html{
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(46, 57, 72);
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+}
+
+:root{
+    --animation-time: 2000ms;
+}
+
+.content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100vw;
+    max-width: 300px;
+    height: 3rem;
+    background-color: rgb(68, 68, 107);
+    box-shadow: 
+        inset -1px -1px 6px 3px rgba(0, 0, 0, 0.236),
+        0 12px 12px -12px rgba(0, 0, 0, 0.236);
+    border-radius: 3px;
+    border: 1px solid rgba(25, 25, 56, 0.426);
+}
+
+.content-container .content{
+    font-size: 1.25rem;
+    color: white;
+    font-weight: 500;
+}
+
+.content-container .to-clipboard{
+    appearance: none;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    height: 1em;
+    aspect-ratio: 1;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("/to-clipboard.svg");
+    transition: 300ms transform ease-in-out;
+}
+
+.content-container .to-clipboard:hover{
+    transform: scale(1.1);
+}
+
+.content-container .to-clipboard:active{
+    transition: 100ms transform ease-in-out;
+    transform: scale(0.9);
+}
+
+.input{
+    width: 100vw;
+    max-width: 300px;
+    height: 3rem;
+    outline: none;
+    border: none;
+    box-shadow: 
+        inset -1px -1px 6px 3px rgba(0, 0, 0, 0.236),
+        0 12px 12px -12px rgba(0, 0, 0, 0.236);
+    background-color: rgb(68, 68, 107);
+    padding: 0 2rem;
+}
+
+.input::placeholder{
+    color: white;
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background-color: rgb(64, 64, 157);
+    width: 100vw;
+    max-width: 250px;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation-duration: 500ms;
+    animation-name: slidedown;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    transition: 500ms transform ease-out;
+}
+
+@keyframes slidedown {
+    to{
+        transform: translate(-50%, 2rem);
+    }
+}
+
+.modal::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    background-color: rgb(0, 40, 159);
+    height: 5px;
+    animation-name: deloading;
+    animation-duration: var(--animation-time);
+    animation-timing-function: linear; 
+    animation-fill-mode: forwards;
+}
+
+@keyframes deloading{
+    to{
+        width: 0%;
+    }
+}
+
+.modal-close{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 0.75rem;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    background-position: center;
+    background-size: contain;
+    background-image: url("/modal-close.svg");
+    transition: 500ms transform ease-in-out;
+}
+
+.modal-close:hover{
+    transform: scale(1.1);
+}
+
+.modal-close:active{
+    transition: 100ms transform ease-in-out;
+    transform: scale(0.9);
+}
+
+.modal-close.removing{
+    animation: none;
+    transform: translate(-50%, -100%) !important;
+}
